@@ -49,9 +49,19 @@ class Pantry
     end
   end
 
+  def how_many_can_i_make
+    recipes_in_stock.inject({}) do |how_many, recipe|
+      how_many[recipe.name] = amount_available(recipe)
+      how_many
+    end
+  end
 
-
-
-
-
+  def amount_available(recipe)
+    tallies = recipe.ingredients.map do |ingredient, amount_required|
+      @stock[ingredient] / amount_required
+    end
+    tallies.min_by do |ingredient, amount|
+      amount
+    end
+  end
 end
