@@ -21,6 +21,15 @@ class Pantry
     end
   end
 
+  def print_shopping_list
+    list = []
+    @shopping_list.each do |key, value|
+      list << "* #{key}: #{value}"
+    end
+    list.join("\n")
+  end
+
+
 
 
 
